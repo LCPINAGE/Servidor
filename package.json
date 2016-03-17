@@ -1,14 +1,14 @@
 {
-  "name": "meanjs",
-  "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
-  "version": "0.5.0-beta",
+  "name": "Uros",
+  "description": "Servidor Uros",
+  "version": "0.1",
   "meanjs-version": "0.5.0-beta",
   "private": false,
   "author": "https://github.com/meanjs/mean/graphs/contributors",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/meanjs/mean.git"
+    "url": "https://github.com/UrosSmartHome/Servidor.git"
   },
   "engines": {
     "node": ">=0.12.0",
@@ -47,6 +47,7 @@
     "method-override": "~2.3.5",
     "gulp-wiredep": "~0.0.0",
     "mocha": "~2.4.5",
+    "mqtt": "^1.7.3",
     "mongoose": "~4.4.3 <4.4.7",
     "morgan": "~1.6.1",
     "multer": "~1.1.0",
