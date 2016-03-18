@@ -1,6 +1,14 @@
 <section>
   <div class="page-header">
-    <h1>Articles</h1>
+    <h1>Histórico</h1>
+  </div>
+  <div class = "">
+   <a class="btn btn-primary" ng-click="vm.activateNotify()">
+    <i class="glyphicon glyphicon-play"></i>
+   </a>
+   <a class="btn btn-primary" ng-click="vm.desactivateNotify()">
+     <i class="glyphicon glyphicon-stop"></i>
+   </a>
   </div>
   <div class="list-group">
     <a ng-repeat="article in vm.articles" ui-sref="articles.view({ articleId: article._id })" class="list-group-item">
@@ -9,7 +17,7 @@
         <span ng-bind="article.created | date:'mediumDate'"></span>
         by
         <span ng-if="article.user" ng-bind="article.user.displayName"></span>
-        <span ng-if="!article.user">Deleted User</span>
+        <span ng-if="!article.user">Central UrOS</span>
       </small>
       <h4 class="list-group-item-heading" ng-bind="article.title"></h4>
       <p class="list-group-item-text" ng-bind="article.content"></p>
