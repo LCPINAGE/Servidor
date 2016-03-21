@@ -18,7 +18,7 @@ client.on('connect', function() {
 client.on('message', function(topic, message) {
   console.log(message.toString());
   var article = new Article();
-  article.title = 'UrOS';
+  article.title = 'Movimento Detectado';
   article.content = message.toString();
   article.save(function(err) {
     if (err) {
@@ -32,12 +32,12 @@ client.on('message', function(topic, message) {
 
 exports.activate = function () {
   client.publish('topico_mensura_out', '4000');
-  console.log('Dado enviado mqtt');
+  console.log('Dado 4000 enviado mqtt');
 };
 
 exports.desactivate = function () {
   client.publish('topico_mensura_out', '4001');
-  console.log('Dado enviado mqtt');
+  console.log('Dado 4001 enviado mqtt');
 };
 
 /**
@@ -138,7 +138,7 @@ exports.articleByID = function (req, res, next, id) {
       return next(err);
     } else if (!article) {
       return res.status(404).send({
-        message: 'No article with that identifier has been found'
+        message: 'Nenhum artigo encontrado'
       });
     }
     req.article = article;

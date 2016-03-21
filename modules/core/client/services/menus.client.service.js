@@ -39,10 +39,10 @@ angular.module('core').service('Menus', [
         if (this.menus[menuId]) {
           return true;
         } else {
-          throw new Error('Menu does not exist');
+          throw new Error('Menu não existe');
         }
       } else {
-        throw new Error('MenuId was not provided');
+        throw new Error('MenuId não esta disponivel');
       }
     };
 

@@ -18,7 +18,7 @@ var ArticleSchema = new Schema({
     type: String,
     default: '',
     trim: true,
-    required: 'Title cannot be blank'
+    required: 'Título não pode ficar em branco'
   },
   content: {
     type: String,

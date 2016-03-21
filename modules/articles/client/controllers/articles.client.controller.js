@@ -16,25 +16,17 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-    vm.activateNotify = activateNotify;
-    vm.desactivateNotify = desactivateNotify;
-
-    function activateNotify() {
-      vm.$activate();
-    }
-
-    function desactivateNotify() {
-      vm.$desactivate();
-    }
     // Remove existing Article
     function remove() {
-      if (confirm('Are you sure you want to delete?')) {
+      if (confirm('Tem certeza que deseja excluir?')) {
         vm.article.$remove($state.go('articles.list'));
       }
     }
 
     // Save Article
     function save(isValid) {
+
+      console.log("ativando");
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.articleForm');
         return false;
