@@ -9,21 +9,22 @@
 
   function menuConfig(Menus) {
     Menus.addMenuItem('topbar', {
-      title: 'Articles',
+      title: 'Historico',
       state: 'articles',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['user']
     });
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'articles', {
-      title: 'List Articles',
-      state: 'articles.list'
+      title: 'Listar Histórico',
+      state: 'articles.list',
+      roles: ['user']
     });
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'articles', {
-      title: 'Create Article',
+      title: 'Adicionar Item ao Historico',
       state: 'articles.create',
       roles: ['user']
     });
