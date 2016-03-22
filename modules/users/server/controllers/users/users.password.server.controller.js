@@ -34,11 +34,11 @@ exports.forgot = function (req, res, next) {
         }, '-salt -password', function (err, user) {
           if (err || !user) {
             return res.status(400).send({
-              message: 'No account with that username has been found'
+              message: 'Nenhuma conta com esse nome de usuário encontrada'
             });
           } else if (user.provider !== 'local') {
             return res.status(400).send({
-              message: 'It seems like you signed up using your ' + user.provider + ' account'
+              message: 'Parece que você se inscreveu usando a sua' + user.provider + ' conta'
             });
           } else {
             user.resetPasswordToken = token;
@@ -51,7 +51,7 @@ exports.forgot = function (req, res, next) {
         });
       } else {
         return res.status(400).send({
-          message: 'Username field must not be blank'
+          message: 'Campo usuário não pode ficar em braco'
         });
       }
     },
@@ -80,11 +80,11 @@ exports.forgot = function (req, res, next) {
       smtpTransport.sendMail(mailOptions, function (err) {
         if (!err) {
           res.send({
-            message: 'An email has been sent to the provided email with further instructions.'
+            message: 'Um email foi enviado para o e-mail fornecido com mais instruções.'
           });
         } else {
           return res.status(400).send({
-            message: 'Failure sending email'
+            message: 'Falha ao enviar o email'
           });
         }
 
@@ -161,12 +161,12 @@ exports.reset = function (req, res, next) {
             });
           } else {
             return res.status(400).send({
-              message: 'Passwords do not match'
+              message: 'Senhas não conferem'
             });
           }
         } else {
           return res.status(400).send({
-            message: 'Password reset token is invalid or has expired.'
+            message: 'token de redefinição de senha é inválido ou expirou.'
           });
         }
       });
@@ -184,7 +184,7 @@ exports.reset = function (req, res, next) {
       var mailOptions = {
         to: user.email,
         from: config.mailer.from,
-        subject: 'Your password has been changed',
+        subject: 'Sua senha foi alterada',
         html: emailHTML
       };
 
@@ -225,7 +225,7 @@ exports.changePassword = function (req, res, next) {
                       res.status(400).send(err);
                     } else {
                       res.send({
-                        message: 'Password changed successfully'
+                        message: 'Senha alterada com sucesso'
                       });
                     }
                   });
@@ -233,28 +233,28 @@ exports.changePassword = function (req, res, next) {
               });
             } else {
               res.status(400).send({
-                message: 'Passwords do not match'
+                message: 'Sehas não conferem'
               });
             }
           } else {
             res.status(400).send({
-              message: 'Current password is incorrect'
+              message: 'Senha atual esta incorreta'
             });
           }
         } else {
           res.status(400).send({
-            message: 'User is not found'
+            message: 'Usuário não encontrado'
           });
         }
       });
     } else {
       res.status(400).send({
-        message: 'Please provide a new password'
+        message: 'Por favor insira sua nova senha'
       });
     }
   } else {
     res.status(400).send({
-      message: 'User is not signed in'
+      message: 'Usuário não cadastrado'
     });
   }
 };

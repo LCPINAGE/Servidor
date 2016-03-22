@@ -12,11 +12,11 @@
   </div>
   <small>
     <em class="text-muted">
-      Posted on
+      Postado em
       <span ng-bind="vm.article.created | date:'mediumDate'"></span>
       by
       <span ng-if="vm.article.user" ng-bind="vm.article.user.displayName"></span>
-      <span ng-if="!vm.article.user">Usuário Deletado</span>
+      <span ng-if="!vm.article.user">Usuário Desconhecido</span>
     </em>
   </small>
   <p class="lead" ng-bind="vm.article.content"></p>

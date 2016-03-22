@@ -45,7 +45,7 @@ exports.update = function (req, res) {
     });
   } else {
     res.status(400).send({
-      message: 'User is not signed in'
+      message: 'Usuário não esta conectado'
     });
   }
 };
@@ -65,7 +65,7 @@ exports.changeProfilePicture = function (req, res) {
     upload(req, res, function (uploadError) {
       if (uploadError) {
         return res.status(400).send({
-          message: 'Error occurred while uploading profile picture'
+          message: 'Ocorreu um erro ao carregar imagem no perfil'
         });
       } else {
         user.profileImageURL = config.uploads.profileUpload.dest + req.file.filename;
@@ -89,7 +89,7 @@ exports.changeProfilePicture = function (req, res) {
     });
   } else {
     res.status(400).send({
-      message: 'User is not signed in'
+      message: 'Usuário não esta conectado'
     });
   }
 };

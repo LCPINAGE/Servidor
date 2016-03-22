@@ -22,7 +22,7 @@ module.exports = {
       // stream: {
       //  directoryPath: process.cwd(),
       //  fileName: 'access.log',
-      //  rotatingLogs: { // for more info on rotating logs - https://github.com/holidayextras/file-stream-rotator#usage
+      //  rotatingLogs: { // for more info on rotating logs - https://gthub.com/holidayextras/file-stream-rotator#usage
       //    active: false, // activate to use rotating logs
       //    fileName: 'access-%DATE%.log', // if rotating logs are active, this fileName setting will be used
       //    frequency: 'daily',
@@ -40,12 +40,12 @@ module.exports = {
     callbackURL: '/api/auth/facebook/callback'
   },
   twitter: {
-    clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
-    clientSecret: process.env.TWITTER_SECRET || 'CONSUMER_SECRET',
+    clientID: process.env.TWITTER_KEY || '5H2b7QdeQrrn9Rx6ILY3Hus6f',
+    clientSecret: process.env.TWITTER_SECRET || 'ff43iunmold4IX1q6w7aryYly5XB9LdEq7x4x0sUg7Ia3raiMV',
     callbackURL: '/api/auth/twitter/callback'
   },
   google: {
-    clientID: process.env.GOOGLE_ID || 'APP_ID',
+    clientID: process.env.GOOGLE_ID || 'uros-1257',
     clientSecret: process.env.GOOGLE_SECRET || 'APP_SECRET',
     callbackURL: '/api/auth/google/callback'
   },

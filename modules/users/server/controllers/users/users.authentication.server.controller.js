@@ -195,7 +195,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
         return done(err, user, '/settings/accounts');
       });
     } else {
-      return done(new Error('User is already connected using this provider'), user);
+      return done(new Error('Usuário já está conectado usando este provedor'), user);
     }
   }
 };
@@ -209,7 +209,7 @@ exports.removeOAuthProvider = function (req, res, next) {
 
   if (!user) {
     return res.status(401).json({
-      message: 'User is not authenticated'
+      message: 'Usuário não esta atenticado'
     });
   } else if (!provider) {
     return res.status(400).send();

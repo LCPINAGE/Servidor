@@ -32,7 +32,7 @@
         }
       })
       .state('admin.user-edit', {
-        url: '/users/:userId/editar\r',
+        url: '/users/:userId/edit\r',
         templateUrl: 'modules/users/client/views/admin/edit-user.client.view.html',
         controller: 'Controle de usuário',
         controllerAs: 'vm',

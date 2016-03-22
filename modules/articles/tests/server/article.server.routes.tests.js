@@ -51,15 +51,15 @@ describe('Article CRUD tests', function () {
     // Save a user to the test db and create new article
     user.save(function () {
       article = {
-        title: 'Article Title',
-        content: 'Article Content'
+        title: 'Título do Artigo',
+        content: 'Conteúdo do Artigo'
       };
 
       done();
     });
   });
 
-  it('should be able to save an article if logged in', function (done) {
+  it('So sera possivel guardar um artigo se logado', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -95,7 +95,7 @@ describe('Article CRUD tests', function () {
 
                 // Set assertions
                 (articles[0].user._id).should.equal(userId);
-                (articles[0].title).should.match('Article Title');
+                (articles[0].title).should.match('Título do Artigo');
 
                 // Call the assertion callback
                 done();
@@ -104,7 +104,7 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should not be able to save an article if not logged in', function (done) {
+  it('Não é possivel salvar o artigo se você não estiver logado', function (done) {
     agent.post('/api/articles')
       .send(article)
       .expect(403)
@@ -114,7 +114,7 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should not be able to save an article if no title is provided', function (done) {
+  it('Você não pode s o atigo sem título', function (done) {
     // Invalidate title field
     article.title = '';
 
@@ -136,7 +136,7 @@ describe('Article CRUD tests', function () {
           .expect(400)
           .end(function (articleSaveErr, articleSaveRes) {
             // Set message assertion
-            (articleSaveRes.body.message).should.match('Title cannot be blank');
+            (articleSaveRes.body.message).should.match('Título não pode ficar em branco');
 
             // Handle article save error
             done(articleSaveErr);
@@ -144,7 +144,7 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should be able to update an article if signed in', function (done) {
+  it('Você só pode atualizar o artigo se estiver logado', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -191,7 +191,7 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should be able to get a list of articles if not signed in', function (done) {
+  it('Você não pode listar os artigos sem estar logado', function (done) {
     // Create new article model instance
     var articleObj = new Article(article);
 
@@ -210,7 +210,7 @@ describe('Article CRUD tests', function () {
     });
   });
 
-  it('should be able to get a single article if not signed in', function (done) {
+  it('Você pode obter um unico arquivo sem estar logado', function (done) {
     // Create new article model instance
     var articleObj = new Article(article);
 
@@ -227,7 +227,7 @@ describe('Article CRUD tests', function () {
     });
   });
 
-  it('should return proper error for single article with an invalid Id, if not signed in', function (done) {
+  it('  deve retornar erro adequado para um único artigo com um ID inválido, se não estiver logado', function (done) {
     // test is not a valid mongoose Id
     request(app).get('/api/articles/test')
       .end(function (req, res) {
@@ -239,19 +239,19 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should return proper error for single article which doesnt exist, if not signed in', function (done) {
+  it('deve retornar erro adequado para o único artigo que não existe, se não estiver logado', function (done) {
     // This is a valid mongoose Id but a non-existent article
     request(app).get('/api/articles/559e9cd815f80b4c256a8f41')
       .end(function (req, res) {
         // Set assertion
-        res.body.should.be.instanceof(Object).and.have.property('message', 'No article with that identifier has been found');
+        res.body.should.be.instanceof(Object).and.have.property('message', 'Nenhum artigo com identificador que foi encontradowith that identifier has been found');
 
         // Call the assertion callback
         done();
       });
   });
 
-  it('should be able to delete an article if signed in', function (done) {
+  it('deve ser capaz de eliminar um artigo, se estiver logado', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -294,7 +294,7 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should not be able to delete an article if not signed in', function (done) {
+  it('não deve ser possível eliminar um artigo, se não estiver logado', function (done) {
     // Set article user
     article.user = user;
 
@@ -308,7 +308,7 @@ describe('Article CRUD tests', function () {
         .expect(403)
         .end(function (articleDeleteErr, articleDeleteRes) {
           // Set message assertion
-          (articleDeleteRes.body.message).should.match('User is not authorized');
+          (articleDeleteRes.body.message).should.match('Usuário não autorizado');
 
           // Handle article error error
           done(articleDeleteErr);
@@ -317,7 +317,7 @@ describe('Article CRUD tests', function () {
     });
   });
 
-  it('should be able to get a single article that has an orphaned user reference', function (done) {
+  it('deve ser capaz de obter um único artigo que tem uma referência de usuário órfão', function (done) {
     // Create orphan user creds
     var _creds = {
       username: 'orphan',
@@ -404,7 +404,7 @@ describe('Article CRUD tests', function () {
     });
   });
 
-  it('should be able to get a single article if signed in and verify the custom "isCurrentUserOwner" field is set to "true"', function (done) {
+  it('deve ser capaz de obter um único artigo, se conectado e verificar o costume "isCurrentUserOwner" campo é definido como "true"', function (done) {
     // Create new article model instance
     article.user = user;
     var articleObj = new Article(article);
@@ -457,7 +457,7 @@ describe('Article CRUD tests', function () {
     });
   });
 
-  it('should be able to get a single article if not signed in and verify the custom "isCurrentUserOwner" field is set to "false"', function (done) {
+  it('deve ser capaz de obter um único artigo, se não conectado e verificar o costume "isCurrentUserOwner" campo é definido como "false"', function (done) {
     // Create new article model instance
     var articleObj = new Article(article);
 
@@ -475,7 +475,7 @@ describe('Article CRUD tests', function () {
     });
   });
 
-  it('should be able to get single article, that a different user created, if logged in & verify the "isCurrentUserOwner" field is set to "false"', function (done) {
+  it('deve ser capaz de obter único artigo, que um usuário diferente criado, se conectado para verificar o campo "isCurrentUserOwner" é definido como "false"', function (done) {
     // Create temporary user creds
     var _creds = {
       username: 'temp',

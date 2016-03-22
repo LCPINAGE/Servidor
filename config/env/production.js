@@ -40,15 +40,15 @@ module.exports = {
   facebook: {
     clientID: process.env.FACEBOOK_ID || '1588134361510224',
     clientSecret: process.env.FACEBOOK_SECRET || '7c47b25866add8afcfec114db2fbb5c0',
-    callbackURL: '//connect.facebook.net/en_US/sdk.js'
+    callbackURL: '/api/auth/facebook/callback'
   },
   twitter: {
-    clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
-    clientSecret: process.env.TWITTER_SECRET || 'CONSUMER_SECRET',
+    clientID: process.env.TWITTER_KEY || '5H2b7QdeQrrn9Rx6ILY3Hus6f',
+    clientSecret: process.env.TWITTER_SECRET || 'ff43iunmold4IX1q6w7aryYly5XB9LdEq7x4x0sUg7Ia3raiMV',
     callbackURL: '/api/auth/twitter/callback'
   },
   google: {
-    clientID: process.env.GOOGLE_ID || 'APP_ID',
+    clientID: process.env.GOOGLE_ID || 'uros-1257',
     clientSecret: process.env.GOOGLE_SECRET || 'APP_SECRET',
     callbackURL: '/api/auth/google/callback'
   },
