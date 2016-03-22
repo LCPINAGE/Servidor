@@ -32,7 +32,7 @@ function getLogFormat () {
 
     if (process.env.NODE_ENV !== 'test') {
       console.log();
-      console.log(chalk.yellow('Warning: An invalid format was provided. The logger will use the default format of "' + format + '"'));
+      console.log(chalk.yellow('Atenção, formato inválido. Por favor, selecione uma imagem no formato ' + format + '"'));
       console.log();
     }
   }

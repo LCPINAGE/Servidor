@@ -18,10 +18,10 @@ var getUniqueErrorMessage = function (err) {
       begin = err.errmsg.lastIndexOf('index: ') + 7;
     }
     var fieldName = err.errmsg.substring(begin, err.errmsg.lastIndexOf('_1'));
-    output = fieldName.charAt(0).toUpperCase() + fieldName.slice(1) + ' already exists';
+    output = fieldName.charAt(0).toUpperCase() + fieldName.slice(1) + ' ja existe';
 
   } catch (ex) {
-    output = 'Unique field already exists';
+    output = 'Campo unico ja existe';
   }
 
   return output;
@@ -40,7 +40,7 @@ exports.getErrorMessage = function (err) {
         message = getUniqueErrorMessage(err);
         break;
       default:
-        message = 'Something went wrong';
+        message = 'Alguma coisa deu errado';
     }
   } else {
     for (var errName in err.errors) {

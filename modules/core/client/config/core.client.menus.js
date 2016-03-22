@@ -21,22 +21,22 @@
     });
 
     Menus.addSubMenuItem('account', 'settings', {
-      title: 'Edit Profile',
+      title: 'Editar Conta',
       state: 'settings.profile'
     });
 
     Menus.addSubMenuItem('account', 'settings', {
-      title: 'Edit Profile Picture',
+      title: 'Editar Imagem da Conta',
       state: 'settings.picture'
     });
 
     Menus.addSubMenuItem('account', 'settings', {
-      title: 'Change Password',
+      title: 'Redefinir Senha',
       state: 'settings.password'
     });
 
     Menus.addSubMenuItem('account', 'settings', {
-      title: 'Manage Social Accounts',
+      title: 'Gerenciar Redes Sociais',
       state: 'settings.accounts'
     });
 

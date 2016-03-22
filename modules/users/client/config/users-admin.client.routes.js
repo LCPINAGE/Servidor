@@ -28,19 +28,19 @@
           userResolve: getUser
         },
         data: {
-          pageTitle: 'Edit {{ userResolve.displayName }}'
+          pageTitle: 'Editar {{ userResolve.displayName }}'
         }
       })
       .state('admin.user-edit', {
-        url: '/users/:userId/edit',
+        url: '/users/:userId/editar\r',
         templateUrl: 'modules/users/client/views/admin/edit-user.client.view.html',
-        controller: 'UserController',
+        controller: 'Controle de usuário',
         controllerAs: 'vm',
         resolve: {
           userResolve: getUser
         },
         data: {
-          pageTitle: 'Edit User {{ userResolve.displayName }}'
+          pageTitle: 'Editar usuário {{ userResolve.displayName }}'
         }
       });
 
