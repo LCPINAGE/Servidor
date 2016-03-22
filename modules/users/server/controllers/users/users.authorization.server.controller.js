@@ -13,7 +13,7 @@ var _ = require('lodash'),
 exports.userByID = function (req, res, next, id) {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Usuário inválido'
+      message: 'Usuário Invalido'
     });
   }
 
@@ -23,7 +23,7 @@ exports.userByID = function (req, res, next, id) {
     if (err) {
       return next(err);
     } else if (!user) {
-      return next(new Error('Falha de carregar usuário ' + id));
+      return next(new Error('Failed to load User ' + id));
     }
 
     req.profile = user;

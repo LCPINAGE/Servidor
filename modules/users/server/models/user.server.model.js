@@ -32,13 +32,13 @@ var UserSchema = new Schema({
     type: String,
     trim: true,
     default: '',
-    validate: [validateLocalStrategyProperty, 'Por favor, preencha seu primeiro nome']
+    validate: [validateLocalStrategyProperty, 'Please fill in your first name']
   },
   lastName: {
     type: String,
     trim: true,
     default: '',
-    validate: [validateLocalStrategyProperty, 'Por favor, preencha seu sobrenome']
+    validate: [validateLocalStrategyProperty, 'Please fill in your last name']
   },
   displayName: {
     type: String,
@@ -50,12 +50,12 @@ var UserSchema = new Schema({
     lowercase: true,
     trim: true,
     default: '',
-    validate: [validateLocalStrategyEmail, 'Por favor, preencha seu endereço de email']
+    validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
   },
   username: {
     type: String,
-    unique: 'Usuário existente',
-    required: 'Por favor, preencha o campo usuário',
+    unique: 'Username already exists',
+    required: 'Please fill in a username',
     lowercase: true,
     trim: true
   },
@@ -72,7 +72,7 @@ var UserSchema = new Schema({
   },
   provider: {
     type: String,
-    required: 'Fornecedor requerido'
+    required: 'Provider is required'
   },
   providerData: {},
   additionalProvidersData: {},
@@ -82,7 +82,7 @@ var UserSchema = new Schema({
       enum: ['user', 'admin']
     }],
     default: ['user'],
-    required: 'Por favor, forneça pelo menos uma função'
+    required: 'Please provide at least one role'
   },
   updated: {
     type: Date
@@ -195,7 +195,7 @@ UserSchema.statics.generateRandomPassphrase = function () {
 
     // Send the rejection back if the passphrase fails to pass the strength test
     if (owasp.test(password).errors.length) {
-      reject(new Error('Um problema inesperado ocorreu ao gerar a senha aleatória'));
+      reject(new Error('An unexpected problem occured while generating the random passphrase'));
     } else {
       // resolve with the validated passphrase
       resolve(password);

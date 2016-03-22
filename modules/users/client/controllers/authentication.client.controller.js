@@ -33,7 +33,7 @@
         return false;
       }
 
-      $http.post('/api/auth/signin', vm.credentials).success(function (response) {
+      $http.post('/api/auth/signup', vm.credentials).success(function (response) {
         // If successful we assign the response to the global user model
         vm.authentication.user = response;
 
@@ -53,7 +53,7 @@
         return false;
       }
 
-      $http.post('/api/auth/signup', vm.credentials).success(function (response) {
+      $http.post('/api/auth/signin', vm.credentials).success(function (response) {
         // If successful we assign the response to the global user model
         vm.authentication.user = response;
 

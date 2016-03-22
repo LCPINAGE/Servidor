@@ -60,7 +60,7 @@
         Authentication.user = response;
 
         // And redirect to the index page
-        $location.path('/senha/reset/success');
+        $location.path('/password/reset/success');
       }).error(function (response) {
         vm.error = response.message;
       });

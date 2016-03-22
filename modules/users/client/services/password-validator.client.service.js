@@ -24,7 +24,7 @@
     }
 
     function getPopoverMsg() {
-      var popoverMsg = 'Por favor insira uma senha ou senha com 10 ou mais caracteres, números, letras minúsculas, maiúsculas e caracteres especiais';
+      var popoverMsg = 'Please enter a passphrase or password with 10 or more characters, numbers, lowercase, uppercase, and special characters.';
 
       return popoverMsg;
     }

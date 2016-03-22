@@ -76,7 +76,7 @@ exports.list = function (req, res) {
 exports.userByID = function (req, res, next, id) {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Usuário Inválido'
+      message: 'User is invalid'
     });
   }
 
@@ -84,7 +84,7 @@ exports.userByID = function (req, res, next, id) {
     if (err) {
       return next(err);
     } else if (!user) {
-      return next(new Error('Falha ao carregar usuário ' + id));
+      return next(new Error('Failed to load user ' + id));
     }
 
     req.model = user;
