@@ -2,31 +2,31 @@
   'use strict';
 
   angular
-    .module('articles')
+    .module('centrals')
     .run(menuConfig);
 
   menuConfig.$inject = ['Menus'];
 
   function menuConfig(Menus) {
     Menus.addMenuItem('topbar', {
-      title: 'Historico',
-      state: 'articles',
+      title: 'Central',
+      state: 'centrals',
       type: 'dropdown',
       roles: ['user']
     });
 
 
     // Add the dropdown list item
-    Menus.addSubMenuItem('topbar', 'articles', {
-      title: 'Listar Histórico',
-      state: 'articles.list',
+    Menus.addSubMenuItem('topbar', 'centrals', {
+      title: 'Listar Centrais',
+      state: 'centrals.list',
       roles: ['user']
     });
 
     // Add the dropdown create item
-    Menus.addSubMenuItem('topbar', 'articles', {
-      title: 'Adicionar Item ao Historico',
-      state: 'articles.create',
+    Menus.addSubMenuItem('topbar', 'centrals', {
+      title: 'Adicionar Central',
+      state: 'centrals.create',
       roles: ['user']
     });
   }

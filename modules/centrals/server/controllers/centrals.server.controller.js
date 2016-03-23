@@ -7,45 +7,12 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Central = mongoose.model('Central'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
-var mqtt = require('mqtt');
-var client = mqtt.connect('mqtt://broker.mqtt-dashboard.com');
-
-client.on('connect', function() {
-  client.subscribe('topico_mensura_out');
-  client.publish('topico_mensura_in', 'Central conectada.');
-});
-
-client.on('message', function(topic, message) {
-  console.log(message.toString());
-  var dados = message.toString();
-  console.log(dados);
-  var central = new Central();
- /* central.title = 'Movimento Detectado';
-  central.content = message.toString();
-  central.save(function(err) {
-    if (err) {
-      console.log('Erro ao salvar no banco de dados');
-      console.log(err);
-    } else {
-      console.log('Dado salvo com sucesso');
-    }
-  });*/
-});
-
-exports.activate = function () {
-  client.publish('topico_mensura_out', '4000');
-  console.log('Dado 4000 enviado mqtt');
-};
-
-exports.desactivate = function () {
-  client.publish('topico_mensura_out', '4001');
-  console.log('Dado 4001 enviado mqtt');
-};
+var central = new Central();
 /**
  * Create an central
  */
 
-exports.comando = function (req, res) {
+/* exports.comando = function (req, res) {
   var comando = req.body.comando;
   var central = req.central;
   client.publish(central.canal_mqtt, comando, null, function(err) {
@@ -57,7 +24,7 @@ exports.comando = function (req, res) {
       res.json("Comando enviado");
     }
   });
-};
+}; */
 
 exports.sync = function(req, res) {
   var central = req.central;
@@ -98,6 +65,7 @@ exports.update = function (req, res) {
   var central = req.central;
 
   central.nome = req.body.nome;
+  central.descricao = req.body.descricao;
 
   central.save(function (err) {
     if (err) {

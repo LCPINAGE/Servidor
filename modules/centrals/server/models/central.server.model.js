@@ -16,6 +16,11 @@ var CentralSchema = new Schema({
     trim: true,
     required: 'nome não pode ficar em branco'
   },
+  descricao: {
+    type: String,
+    default: '',
+    trim: true
+  },
   canal_mqtt: {
     type: String,
     default: 'topico_mensura_in',

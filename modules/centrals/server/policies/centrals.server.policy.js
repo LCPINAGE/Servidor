@@ -15,31 +15,31 @@ exports.invokeRolesPolicies = function () {
   acl.allow([{
     roles: ['admin'],
     allows: [{
-      resources: '/api/central',
+      resources: '/api/centrals',
       permissions: '*'
     }, {
-      resources: '/api/central/:centralId',
+      resources: '/api/centrals/:centralId',
       permissions: '*'
     }, {
-      resources: '/api/central/comando/:centralId',
+      resources: '/api/centrals/comando/:centralId',
       permissions: '*'
     }, {
-      resources: '/api/central/sync/:centralId',
+      resources: '/api/centrals/sync/:centralId',
       permissions: '*'
     }]
   }, {
     roles: ['user'],
     allows: [{
-      resources: '/api/central',
+      resources: '/api/centrals',
       permissions: ['get', 'post']
     }, {
-      resources: '/api/central/:centralId',
+      resources: '/api/centrals/:centralId',
       permissions: ['get', 'put']
     }, {
-      resources: '/api/central/comando/:centralId',
+      resources: '/api/centrals/comando/:centralId',
       permissions: ['post']
     }, {
-      resources: '/api/central/sync/:centralId',
+      resources: '/api/centrals/sync/:centralId',
       permissions: ['get']
     }]
   }, {

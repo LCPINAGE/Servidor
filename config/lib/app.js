@@ -10,8 +10,8 @@ var config = require('../config'),
   seed = require('./seed');
 
 function seedDB() {
-  if (config.seedDB && config.seedDB.seed) {
-    console.log(chalk.bold.red('Warning:  Database seeding is turned on'));
+  if (true) { // config.seedDB && config.seedDB.seed) {
+    console.log(chalk.bold.red('Aviso:  Usuarios iniciais ativados'));
     seed.start();
   }
 }
@@ -48,9 +48,9 @@ module.exports.start = function start(callback) {
       console.log(chalk.green('Environment:     ' + process.env.NODE_ENV));
       console.log(chalk.green('Server:          ' + server));
       console.log(chalk.green('Database:        ' + config.db.uri));
-      console.log(chalk.green('App version:     ' + config.meanjs.version));
-      if (config.meanjs['meanjs-version'])
-        console.log(chalk.green('UrOS version: ' + config.meanjs['meanjs-version']));
+      console.log(chalk.green('Versao:     ' + config.meanjs.version));
+      if (config.meanjs['Uros-version'])
+        console.log(chalk.green('UrOS versao: ' + config.meanjs['meanjs-version']));
       console.log('--');
 
       if (callback) callback(app, db, config);

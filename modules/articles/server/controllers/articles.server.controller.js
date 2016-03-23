@@ -7,38 +7,6 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Article = mongoose.model('Article'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
-var mqtt = require('mqtt');
-var client = mqtt.connect('mqtt://broker.mqtt-dashboard.com');
-
-client.on('connect', function() {
-  client.subscribe('topico_mensura_out');
-  client.publish('topico_mensura_in', 'Central conectada.');
-});
-
-client.on('message', function(topic, message) {
-  console.log(message.toString());
-  var article = new Article();
-  article.title = 'Movimento Detectado';
-  article.content = message.toString();
-  article.save(function(err) {
-    if (err) {
-      console.log('Erro ao salvar no banco de dados');
-      console.log(err);
-    } else {
-      console.log('Dado salvo com sucesso');
-    }
-  });
-});
-
-exports.activate = function () {
-  client.publish('topico_mensura_out', '4000');
-  console.log('Dado 4000 enviado mqtt');
-};
-
-exports.desactivate = function () {
-  client.publish('topico_mensura_out', '4001');
-  console.log('Dado 4001 enviado mqtt');
-};
 
 /**
  * Create an article
