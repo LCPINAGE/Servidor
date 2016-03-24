@@ -1,6 +1,6 @@
 <section>
   <div class="page-header">
-    <h1>{{vm.dispositivo._id ? 'Editar Artigo' : 'Novo Artigo'}}</h1>
+    <h1>{{vm.dispositivo._id ? 'Editar Dispositivo' : 'Novo Dispositivo'}}</h1>
   </div>
   <div class="col-md-12">
     <form name="vm.form.dispositivoForm" class="form-horizontal" ng-submit="vm.save(vm.form.dispositivoForm.$valid)" novalidate>
@@ -32,7 +32,7 @@
         <div class="form-group" show-errors>
           <label class="control-label" for="type">Central Associada</label>
           <select id="tipo">
-            <option ng-repeat="central in vm.centrals">{{central.nome}}</option>
+            <option ng-repeat="central in vm.central" value= "central._id" ng-bind="central.nome"></option>
           </select>
         </div>
         <br>

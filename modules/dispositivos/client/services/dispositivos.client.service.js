@@ -17,7 +17,19 @@
     });
   }
 
-  function CentralsService($resource) {
-    return $resource('api/centrals', {
-    }
+}());
+
+(function () {
+  'use strict';
+
+  angular
+    .module('dispositivosCentral.services')
+    .factory('DispositivosCentralsService', DispositivosCentralsService);
+
+  DispositivosCentralsService.$inject = ['$http'];
+
+  function DispositivosCentralsService($http) {
+    return $http.get('api/centrals');
+  }
+
 }());
