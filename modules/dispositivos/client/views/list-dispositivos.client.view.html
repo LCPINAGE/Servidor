@@ -1,0 +1,20 @@
+<section>
+  <div class="page-header">
+    <h1>Histórico</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="dispositivo in vm.dispositivos" ui-sref="dispositivos.view({ dispositivoId: dispositivo._id })" class="list-group-item">
+      <small class="list-group-item-text">
+        Criado por
+        <span ng-if="dispositivo.user" ng-bind="dispositivo.user.displayName"></span>
+        <span ng-if="!dispositivo.user">Usuário Desconhecido</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="dispositivo.nome"></h4>
+      <h5 class="list-group-item-text" ng-bind="dispositivo.tipo"></h5>
+      
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.dispositivos.$resolved && !vm.dispositivos.length">
+    Nenhum artigo ainda<a ui-sref="dispositivos.create"> Criar</a>?
+  </div>
+</section>

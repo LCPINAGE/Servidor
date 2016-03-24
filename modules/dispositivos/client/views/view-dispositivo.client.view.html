@@ -1,0 +1,32 @@
+<section>
+  <div class="page-header">
+    <h1 ng-bind="vm.dispositivo.nome"></h1>
+  </div>
+  <div class="pull-right">
+    <a class="btn btn-primary" ng-click="vm.turnOnOff()">
+      <i class="glyphicon glyphicon-play"></i>
+    </a>
+    <a class="btn btn-primary" ui-sref="dispositivos.edit({ dispositivoId: vm.dispositivo._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <small>
+    <em class="text-muted">
+      Postado em
+      <span ng-bind="vm.dispositivo.created | date:'mediumDate'"></span>
+      by
+      <span ng-if="vm.dispositivo.user" ng-bind="vm.dispositivo.user.displayName"></span>
+      <span ng-if="!vm.dispositivo.user">Usuário Desconhecido</span>
+    </em>
+  </small>
+
+   <h5 class="lead" ng-bind="vm.dispositivo.tipo"></h5>
+   <h6 class="lead" ng-bind="vm.dispositivo.central"></h6>
+   <br>
+  <p class="lead" ng-bind="vm.dispositivo.descricao"></p>
+  <p class="lead" ng-bind="vm.dispositivo.estado"></p>
+ 
+</section>
