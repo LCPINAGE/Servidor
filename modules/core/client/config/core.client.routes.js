@@ -29,27 +29,27 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'modules/core/client/views/home.client.view.html'
       })
       .state('not-found', {
-        url: '/not-found',
+        url: '/nao-encontrado',
         templateUrl: 'modules/core/client/views/404.client.view.html',
         data: {
           ignoreState: true,
-          pageTitle: 'Not-Found'
+          pageTitle: 'Não encontrado'
         }
       })
       .state('bad-request', {
-        url: '/bad-request',
+        url: '/erro',
         templateUrl: 'modules/core/client/views/400.client.view.html',
         data: {
           ignoreState: true,
-          pageTitle: 'Bad-Request'
+          pageTitle: 'Erro'
         }
       })
       .state('forbidden', {
-        url: '/forbidden',
+        url: '/proibido',
         templateUrl: 'modules/core/client/views/403.client.view.html',
         data: {
           ignoreState: true,
-          pageTitle: 'Forbidden'
+          pageTitle: 'Proibido'
         }
       });
   }
