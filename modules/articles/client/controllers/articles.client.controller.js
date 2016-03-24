@@ -26,7 +26,6 @@
     // Save Article
     function save(isValid) {
 
-      console.log("ativando");
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.articleForm');
         return false;
