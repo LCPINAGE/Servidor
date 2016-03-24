@@ -99,7 +99,7 @@ exports.delete = function (req, res) {
  * List of central
  */
 exports.list = function (req, res) {
-  Central.find().sort('-created').populate('user', 'displayName').exec(function (err, centrais) {
+  Central.find({ 'user': req.user.id }).sort('-created').populate('user', 'displayName').exec(function (err, centrais) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
