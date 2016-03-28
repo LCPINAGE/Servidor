@@ -31,7 +31,8 @@ var CentralSchema = new Schema({
     ref: 'User'
   },
   dispositivos_conectados: [{
-    type: Schema.ObjectId
+    type: Schema.ObjectId,
+    ref: 'Dispositivos'
   }]
 });
 

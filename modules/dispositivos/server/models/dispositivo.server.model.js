@@ -33,6 +33,11 @@ var DispositivoSchema = new Schema({
   estado: {
     type: Boolean,
     default: false
+  },
+  central: {
+    type: Schema.ObjectId,
+    ref: 'Central',
+    required: 'Selecione uma central'
   }
 });
 

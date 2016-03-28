@@ -31,8 +31,9 @@
 
         <div class="form-group" show-errors>
           <label class="control-label" for="type">Central Associada</label>
-          <select id="tipo">
-            <option ng-repeat="central in vm.central" value= "central._id" ng-bind="central.nome"></option>
+          <select id="central" data-ng-model="vm.dispositivo.central">
+            <option></option>
+            <option ng-repeat="central in vm.central" ng-value="central._id" ng-bind="central.nome"></option>
           </select>
         </div>
         <br>

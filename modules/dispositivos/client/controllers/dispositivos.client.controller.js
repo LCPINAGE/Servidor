@@ -5,9 +5,9 @@
   .module('dispositivos')
   .controller('DispositivosController', DispositivosController);
 
-  DispositivosController.$inject = ['$scope', '$state', '$http', 'dispositivoResolve', 'Authentication', 'DispositivosCentralsService'];
+  DispositivosController.$inject = ['$scope', '$state', '$http', 'dispositivoResolve', 'Authentication'];
 
-  function DispositivosController($scope, $state, $http, dispositivo, Authentication, DispositivosCentralsService) {
+  function DispositivosController($scope, $state, $http, dispositivo, Authentication) {
     var vm = this;
 
     vm.dispositivo = dispositivo;
@@ -17,8 +17,16 @@
     vm.remove = remove;
     vm.save = save;
     vm.turnOnOff = turnOnOff;
-    vm.central = DispositivosCentralsService;
+    vm.central = $http.get('/api/centrals');
+
+
+    vm.central.then(function(ret) {
+      vm.central = ret.data;
+      console.log(vm.central);
+    });
+
     console.log(vm.central);
+
     function turnOnOff() {
       var id = vm.dispositivo._id;
       $http.get('/api/dispositivos/' + id + '/turnOnOff').success(function(retorno) {
