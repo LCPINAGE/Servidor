@@ -6,16 +6,19 @@
     <nav class="col-sm-3 col-md-3">
       <ul class="nav nav-pills nav-stacked">
         <li ui-sref-active="active">
-          <a ui-sref="settings.profile">Edit Profile</a>
+          <a ui-sref="settings.profile">Editar Conta</a>
+        </li>
+         <li ui-sref-active="active">
+          <a ui-sref="settings.central">Selecionar Central</a>
         </li>
         <li ui-sref-active="active">
-          <a ui-sref="settings.picture">Change Profile Picture</a>
+          <a ui-sref="settings.picture">Selecionar Imagem de Perfil</a>
         </li>
         <li ui-sref-active="active" ng-show="vm.user.provider === 'local'">
-          <a ui-sref="settings.password">Change Password</a>
+          <a ui-sref="settings.password">Alterar Senha</a>
         </li>
         <li ui-sref-active="active">
-          <a ui-sref="settings.accounts">Manage Social Accounts</a>
+          <a ui-sref="settings.accounts">Gerenciar Redes Sociais</a>
         </li>
       </ul>
     </nav>

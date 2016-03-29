@@ -38,6 +38,10 @@ var DispositivoSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Central',
     required: 'Selecione uma central'
+  },
+  id_disp_central: {
+    type: Number,
+    required: 'Erro ao salvar ID'
   }
 });
 

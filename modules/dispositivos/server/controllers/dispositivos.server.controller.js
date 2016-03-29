@@ -7,6 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Dispositivo = mongoose.model('Dispositivo'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+var counter;
 
 
 exports.turnOnOff = function (req, res) {
@@ -32,16 +33,29 @@ exports.turnOnOff = function (req, res) {
 exports.create = function (req, res) {
   var dispositivo = new Dispositivo(req.body);
   dispositivo.user = req.user;
-  dispositivo.save(function (err) {
-    if (err) {
+  dispositivo.central = req.user.central;
+  dispositivo.id_disp_central = Dispositivo.count({ 'central': req.user.central }, function(error, nbDocs) {
+    if (error) {
       return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+        message: errorHandler.getErrorMessage(error)
       });
     } else {
-      res.json(dispositivo);
+      nbDocs += 1;
+      dispositivo.id_disp_central = nbDocs;
+      dispositivo.save(function (err) {
+        if (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else {
+          res.json(dispositivo);
+        }
+      });
     }
   });
 };
+
+
 /**
  * Show the current dispositivo
  */

@@ -97,6 +97,11 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
+  },
+  central: {
+    type: Schema.ObjectId,
+    ref: 'Central',
+    default: '56F96830F523C6E411BDAD3B'
   }
 });
 

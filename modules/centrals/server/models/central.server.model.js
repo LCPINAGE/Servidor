@@ -29,11 +29,7 @@ var CentralSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
-  },
-  dispositivos_conectados: [{
-    type: Schema.ObjectId,
-    ref: 'Dispositivos'
-  }]
+  }
 });
 
 mongoose.model('Central', CentralSchema);

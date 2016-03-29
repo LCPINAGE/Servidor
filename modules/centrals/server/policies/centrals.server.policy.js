@@ -44,7 +44,10 @@ exports.invokeRolesPolicies = function () {
     }]
   }, {
     roles: ['guest'],
-    allows: []
+    allows: [{
+      resources: '/api/centrals',
+      permissions: ['get', 'post']
+    }]
   }]);
 };
 

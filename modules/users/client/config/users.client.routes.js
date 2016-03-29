@@ -30,6 +30,15 @@
           pageTitle: 'Configurações'
         }
       })
+      .state('settings.central', {
+        url: '/changeCentral',
+        templateUrl: 'modules/users/client/views/settings/change-central.client.view.html',
+        controller: 'ChangeCentralController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Central'
+        }
+      })
       .state('settings.password', {
         url: '/password',
         templateUrl: 'modules/users/client/views/settings/change-password.client.view.html',
