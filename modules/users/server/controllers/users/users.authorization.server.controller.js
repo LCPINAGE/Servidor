@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module dependencies
+ * Module dependencies.
  */
 var _ = require('lodash'),
   mongoose = require('mongoose'),
@@ -13,7 +13,7 @@ var _ = require('lodash'),
 exports.userByID = function (req, res, next, id) {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Usuário Invalido'
+      message: 'User is invalid'
     });
   }
 
