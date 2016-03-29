@@ -17,15 +17,12 @@
     vm.remove = remove;
     vm.save = save;
     vm.turnOnOff = turnOnOff;
-    vm.central = $http.get('/api/centrals');
-
-
+    /* vm.central = $http.get('/api/centrals');
     vm.central.then(function(ret) {
       vm.central = ret.data;
       console.log(vm.central);
-    });
+    }); */
 
-    console.log(vm.central);
 
     function turnOnOff() {
       var id = vm.dispositivo._id;
