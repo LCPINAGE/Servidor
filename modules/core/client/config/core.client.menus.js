@@ -26,18 +26,8 @@
     });
 
     Menus.addSubMenuItem('account', 'settings', {
-      title: 'Editar Imagem da Conta',
-      state: 'settings.picture'
-    });
-
-    Menus.addSubMenuItem('account', 'settings', {
-      title: 'Redefinir Senha',
-      state: 'settings.password'
-    });
-
-    Menus.addSubMenuItem('account', 'settings', {
-      title: 'Gerenciar Redes Sociais',
-      state: 'settings.accounts'
+      title: 'Selecionar Central',
+      state: 'settings.changeCentral'
     });
 
   }

@@ -9,7 +9,6 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 var counter;
 
-
 exports.turnOnOff = function (req, res) {
   var dispositivo = req.dispositivo;
   if (dispositivo.estado) {
@@ -113,7 +112,7 @@ exports.delete = function (req, res) {
  * List of Dispositivos
  */
 exports.list = function (req, res) {
-  Dispositivo.find().sort('-created').populate('user', 'displayName').exec(function (err, dispositivos) {
+  Dispositivo.find({ 'user': req.user.id, 'central': req.user.central }).sort('-created').populate('user', 'displayName').exec(function (err, dispositivos) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -123,6 +122,7 @@ exports.list = function (req, res) {
     }
   });
 };
+
 
 /**
  * Dispositivo middleware

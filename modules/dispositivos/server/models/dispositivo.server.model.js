@@ -42,6 +42,10 @@ var DispositivoSchema = new Schema({
   id_disp_central: {
     type: Number,
     required: 'Erro ao salvar ID'
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
   }
 });
 

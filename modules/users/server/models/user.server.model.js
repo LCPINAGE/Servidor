@@ -54,8 +54,8 @@ var UserSchema = new Schema({
   },
   username: {
     type: String,
-    unique: 'Username already exists',
-    required: 'Please fill in a username',
+    unique: 'Usuario ja existe',
+    required: 'Por favor, digite seu usuário',
     lowercase: true,
     trim: true
   },
@@ -97,6 +97,14 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
+  }, 
+  central: {
+    type: Schema.ObjectId,
+    ref: 'Central',
+  },
+  central_nome: {
+    type: String,
+    trim: true
   }
 });
 

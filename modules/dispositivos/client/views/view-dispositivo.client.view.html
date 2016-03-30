@@ -13,21 +13,9 @@
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
-  <small>
-    <em class="text-muted">
-      Postado em
-      <span ng-bind="vm.dispositivo.created | date:'mediumDate'"></span>
-      by
-      <span ng-if="vm.dispositivo.user" ng-bind="vm.dispositivo.user.displayName"></span>
-      <span ng-if="!vm.dispositivo.user">Usuário Desconhecido</span>
-    </em>
-  </small>
-
-   <h5 class="lead" ng-bind="vm.dispositivo.tipo"></h5>
-   <h6 class="lead" ng-bind="vm.dispositivo.central"></h6>
-   <br>
-  <p class="lead" ng-bind="vm.dispositivo.descricao"></p>
-  <p class="lead" ng-bind="vm.dispositivo.estado"></p>
-  <p class="lead" ng-bind="vm.dispositivo.id_disp_central"></p>
+   <p class="lead">Tipo: {{vm.dispositivo.tipo}}</p>
+   <p class="lead">Id_Central: {{vm.dispositivo.central}}</p>
+   <p class="lead">Estado: {{vm.dispositivo.estado}}</p>
+   <p class="lead">ID: {{vm.dispositivo.id_disp_central}}</p>
  
 </section>

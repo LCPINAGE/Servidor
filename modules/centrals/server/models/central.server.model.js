@@ -29,7 +29,11 @@ var CentralSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
-  }
+  }, 
+  displayName: {
+    type: String,
+    trim: true
+  },
 });
 
 mongoose.model('Central', CentralSchema);
