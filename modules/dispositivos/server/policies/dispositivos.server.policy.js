@@ -32,6 +32,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/dispositivos/:dispositivoId/turnOnOff',
       permissions: ['get']
+    }, {
+      resources: '/api/dispositivos/procuraDispositivos',
+      permissions: ['get']
     }]
   }, {
     roles: ['guest'],
@@ -43,6 +46,9 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get', 'post', 'put']
     }, {
       resources: '/api/dispositivos/:dispositivoId/turnOnOff',
+      permissions: ['get']
+    }, {
+      resources: '/api/dispositivos/procuraDispositivos',
       permissions: ['get']
     }]
   }]);

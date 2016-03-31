@@ -1,6 +1,6 @@
 <section>
   <div class="page-header">
-    <h1>Histórico</h1>
+    <h1>Dispositivos conectados a {{user.central_nome}}</h1>
   </div>
   <div class="list-group">
     <a ng-repeat="dispositivo in vm.dispositivos" ui-sref="dispositivos.view({ dispositivoId: dispositivo._id })" class="list-group-item">

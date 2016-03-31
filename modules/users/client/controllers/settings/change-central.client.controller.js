@@ -15,9 +15,9 @@ angular.module('users').controller('ChangeCentralController', ['$scope', '$http'
       var nome_central = $http.get('/api/centrals/'+$scope.id_central);
       
       nome_central.then(function(ret) {
-        
         $scope.user.central = $scope.id_central;
-        $scope.user.central_nome = ret.data.nome;
+        $scope.user.centralNome = ret.data.nome;
+        console.log($scope.user.centralNome);
 
         $scope.success = $scope.error = null;
 

@@ -23,6 +23,15 @@
           pageTitle: 'Lista de Dispositivos'
         }
       })
+      .state('dispositivos.find', {
+        url: '/find',
+        templateUrl: 'modules/dispositivos/client/views/list-new-dispositivos.client.view.html',
+        controller: 'DispositivosListController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Procurando'
+        }
+      })
       .state('dispositivos.create', {
         url: '/create',
         templateUrl: 'modules/dispositivos/client/views/form-dispositivo.client.view.html',

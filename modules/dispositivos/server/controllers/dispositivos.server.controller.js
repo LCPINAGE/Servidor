@@ -9,6 +9,20 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 var counter;
 
+var mqtt    = require('mqtt');
+var client  = mqtt.connect('mqtt://broker.mqtt-dashboard.com');
+
+ client.on('connect', function () {
+    client.subscribe('topico_mensura_out');
+    client.publish('topico_mensura_in', 'Ola');
+});
+
+exports.procuraDispositivos = function (req, res) {
+  console.log("Batata frita");
+  client.publish('topico_mensura_in', 'AC');
+  return res.json({ "sucess": true });
+};
+
 exports.turnOnOff = function (req, res) {
   var dispositivo = req.dispositivo;
   if (dispositivo.estado) {

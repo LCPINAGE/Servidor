@@ -164,7 +164,9 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
               email: providerUserProfile.email,
               profileImageURL: providerUserProfile.profileImageURL,
               provider: providerUserProfile.provider,
-              providerData: providerUserProfile.providerData
+              providerData: providerUserProfile.providerData,
+              central_nome: providerUserProfile.central_nome,
+              central: providerUserProfile.central,
             });
 
             // And save the user
@@ -198,7 +200,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
         return done(err, user, '/settings/accounts');
       });
     } else {
-      return done(new Error('User is already connected using this provider'), user);
+      return done(new Error('Usuário ja conectado'), user);
     }
   }
 };
@@ -212,7 +214,7 @@ exports.removeOAuthProvider = function (req, res, next) {
 
   if (!user) {
     return res.status(401).json({
-      message: 'User is not authenticated'
+      message: 'Usuario não autenticado'
     });
   } else if (!provider) {
     return res.status(400).send();

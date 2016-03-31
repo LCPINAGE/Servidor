@@ -26,6 +26,12 @@
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'dispositivos', {
       title: 'Adicionar Dispositivo',
+      state: 'dispositivos.find',
+      roles: ['user']
+    });
+
+    Menus.addSubMenuItem('topbar', 'dispositivos', {
+      title: 'Adicionar Dispositivo Na Mao',
       state: 'dispositivos.create',
       roles: ['user']
     });
