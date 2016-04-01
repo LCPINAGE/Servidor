@@ -15,6 +15,7 @@ var _ = require('lodash'),
 /**
  * Update user details
  */
+
 exports.update = function (req, res) {
   // Init Variables
   var user = req.user;
@@ -27,6 +28,9 @@ exports.update = function (req, res) {
     user = _.extend(user, req.body);
     user.updated = Date.now();
     user.displayName = user.firstName + ' ' + user.lastName;
+    user.centralNome = req.body.centralNome;
+    user.central = req.body.central;
+    console.log(user.centralNome);
 
     user.save(function (err) {
       if (err) {

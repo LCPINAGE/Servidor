@@ -34,6 +34,9 @@ module.exports = {
     ],
     js: [
       'modules/core/client/app/config.js',
+      'modules/core/client/controllers/angular-loading-spinner.js',
+      'modules/core/client/controllers/angular-spinner.min.js',
+      'modules/core/client/controllers/spin.min.js',
       'modules/core/client/app/init.js',
       'modules/*/client/*.js',
       'modules/*/client/**/*.js'

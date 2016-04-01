@@ -11,16 +11,20 @@ var counter;
 
 var mqtt    = require('mqtt');
 var client  = mqtt.connect('mqtt://broker.mqtt-dashboard.com');
-
- client.on('connect', function () {
-    client.subscribe('topico_mensura_out');
-    client.publish('topico_mensura_in', 'Ola');
+client.on('connect', function () {
+  client.subscribe('topico_mensura_out');
+  client.publish('topico_mensura_in', 'Ola');
 });
 
+var msg = null; 
+client.on('message', function (topic, message) {
+    msg = message.toString(); 
+    console.log(message.toString());
+  });
+
 exports.procuraDispositivos = function (req, res) {
-  console.log("Batata frita");
   client.publish('topico_mensura_in', 'AC');
-  return res.json({ "sucess": true });
+  return res.json({ "sucess": true });  
 };
 
 exports.turnOnOff = function (req, res) {

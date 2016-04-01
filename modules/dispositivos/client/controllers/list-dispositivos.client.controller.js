@@ -10,14 +10,20 @@
   function DispositivosListController($scope, $http, $state, DispositivosService, Users, Authentication) {
     var vm = this;
     vm.dispositivos = DispositivosService.query();
-    $scope.user = Authentication.user;
+    vm.user = $http.get('/api/users/me');
+    
+    vm.user.then(function(ret) {
+      vm.user = ret.data;
+      console.log(vm.user);
+    });
+
     vm.procuraDispositivos = procuraDispositivos;
-    console.log($scope.user);
     
     
      function procuraDispositivos() {
       $http.get('/api/dispositivos/procuraDispositivos').success(function(retorno) {
         console.log("deu get");
+        console.log(retorno);
       });
     }
 
