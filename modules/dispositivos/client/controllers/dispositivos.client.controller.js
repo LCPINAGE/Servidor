@@ -5,9 +5,9 @@
   .module('dispositivos')
   .controller('DispositivosController', DispositivosController);
 
-  DispositivosController.$inject = ['$scope', '$state', '$http', 'dispositivoResolve', 'Authentication'];
+  DispositivosController.$inject = ['$scope', '$state', '$http', 'dispositivoResolve', 'Authentication', 'Socket'];
 
-  function DispositivosController($scope, $state, $http, dispositivo, Authentication) {
+  function DispositivosController($scope, $state, $http, dispositivo, Authentication, Socket) {
     var vm = this;
 
     vm.dispositivo = dispositivo;
@@ -17,19 +17,46 @@
     vm.remove = remove;
     vm.save = save;
     vm.turnOnOff = turnOnOff;
-    /* vm.central = $http.get('/api/centrals');
-    vm.central.then(function(ret) {
-      vm.central = ret.data;
-      console.log(vm.central);
-    }); */
+
+    vm.messages = [];
+    vm.messageText = '';
+
+     function init() {
+
+      // Make sure the Socket is connected
+      if (!Socket.socket) {
+        Socket.connect();
+      }
+
+      // Add an event listener to the 'chatMessage' event
+      Socket.on('mqttMessage', function (message) {
+        vm.messages.unshift(message);
+        console.log(message);
+      });
+    }
 
 
     function turnOnOff() {
       var id = vm.dispositivo._id;
       $http.get('/api/dispositivos/' + id + '/turnOnOff').success(function(retorno) {
-        location.reload();
+        console.log(retorno.success);
+        dispositivo.estado = retorno.success;
+        if(retorno.success === true){
+          alert("Notificação Ativada em " + dispositivo.nome);
+        } else {
+          alert("Notivicação Desativada em " + dispositivo.nome);
+        }
       });
     }
+
+    function changeColor(estado) {
+        if (estado) {
+          return '#00ff00';
+        } else {
+          return '#ff0000';
+        }
+    }
+
     // Remove existing Dispositivo
     function remove() {
       if (confirm('Tem certeza que deseja excluir?')) {

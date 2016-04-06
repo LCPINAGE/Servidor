@@ -7,7 +7,6 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Dispositivo = mongoose.model('Dispositivo'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
-var counter;
 
 var mqtt    = require('mqtt');
 var client  = mqtt.connect('mqtt://broker.mqtt-dashboard.com');
@@ -16,11 +15,37 @@ client.on('connect', function () {
   client.publish('topico_mensura_in', 'Ola');
 });
 
+// Tratamento de mensagens recebidas pelo mqtt
 var msg = null; 
+var recebeExtensor = false;
+var buffer = [];
 client.on('message', function (topic, message) {
-    msg = message.toString(); 
-    console.log(message.toString());
+  msg = message.toString().toUpperCase();
+  if(recebeExtensor){
+    if(msg == 'FI'){
+      recebeExtensor = false;
+    } else { 
+      var i = buffer.lenght + 1;
+      buffer[i] = msg;
+    }
+  } else {
+
+    switch (msg) {
+      case 'AE':
+        recebeExtensor =true;
+      break;
+    }
+  }
+});
+
+/*module.exports = function (io, socket) {
+  socket.on('mqttMessage', function (message) {
+    message.type = 'message';
+    message.created = Date.now();
+    // Emit the 'mqttMessage' event
+    io.emit('mqttMessage', message);
   });
+};*/
 
 exports.procuraDispositivos = function (req, res) {
   client.publish('topico_mensura_in', 'AC');
@@ -30,8 +55,10 @@ exports.procuraDispositivos = function (req, res) {
 exports.turnOnOff = function (req, res) {
   var dispositivo = req.dispositivo;
   if (dispositivo.estado) {
+    client.publish('topico_mensura_in', '*' + dispositivo.id_disp_central + '%' + '4001~');
     dispositivo.estado = false;
   } else {
+    client.publish('topico_mensura_in', '*' + dispositivo.id_disp_central + '%' + '4000~');
     dispositivo.estado = true;
   }
   dispositivo.save(function (err) {
@@ -40,7 +67,11 @@ exports.turnOnOff = function (req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json({ "sucess": true });
+      if (dispositivo.estado) {
+        res.json({success : true});
+      } else {
+        res.json({success : false});
+      }
     }
   });
 };

@@ -34,6 +34,10 @@ var CentralSchema = new Schema({
     type: String,
     trim: true
   },
+  topico_mqtt: {
+    type: String,
+    trim: true
+  }
 });
 
 mongoose.model('Central', CentralSchema);

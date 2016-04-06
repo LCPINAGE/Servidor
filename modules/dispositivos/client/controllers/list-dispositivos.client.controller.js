@@ -22,7 +22,6 @@
     
      function procuraDispositivos() {
       $http.get('/api/dispositivos/procuraDispositivos').success(function(retorno) {
-        console.log("deu get");
         console.log(retorno);
       });
     }
