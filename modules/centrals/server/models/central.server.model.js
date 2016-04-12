@@ -34,7 +34,11 @@ var CentralSchema = new Schema({
     type: String,
     trim: true
   },
-  topico_mqtt: {
+  topico_mqtt_in: {
+    type: String,
+    trim: true
+  }, 
+  topico_mqtt_in: {
     type: String,
     trim: true
   }

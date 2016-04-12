@@ -12,14 +12,14 @@
           <a ui-sref="settings.changeCentral">Selecionar Central</a>
         </li>
         <li ui-sref-active="active">
+          <a ui-sref="settings.createCentral">Adicionar Nova Central</a>
+        </li>
+        <li ui-sref-active="active">
           <a ui-sref="settings.picture">Selecionar Imagem de Perfil</a>
         </li>
         <li ui-sref-active="active" ng-show="user.provider === 'local'">
           <a ui-sref="settings.password">Alterar Senha</a>
         </li>
-       <!-- <li ui-sref-active="active">
-          <a ui-sref="settings.accounts">Gerenciar Redes Sociais</a>
-        </li>-->
       </ul>
     </nav>
     <div class="col-sm-9 col-md-8 settings-view">

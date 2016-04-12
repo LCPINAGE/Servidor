@@ -8,7 +8,7 @@
   menuConfig.$inject = ['Menus'];
 
   function menuConfig(Menus) {
-    Menus.addMenuItem('topbar', {
+   /* Menus.addMenuItem('topbar', {
       title: 'Central',
       state: 'centrals',
       type: 'dropdown',
@@ -28,6 +28,6 @@
       title: 'Adicionar Central',
       state: 'centrals.create',
       roles: ['user']
-    });
+    });*/
   }
 }());
