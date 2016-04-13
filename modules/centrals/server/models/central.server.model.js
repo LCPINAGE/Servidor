@@ -21,7 +21,7 @@ var CentralSchema = new Schema({
     default: '',
     trim: true
   },
-  canal_mqtt: {
+  topico_mqtt: {
     type: String,
     default: 'topico_mensura_in',
     trim: true

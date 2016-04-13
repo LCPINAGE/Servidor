@@ -18,10 +18,11 @@
     vm.save = save;
     vm.turnOnOff = turnOnOff;
 
+
     vm.messages = [];
     vm.messageText = '';
 
-     function init() {
+    function init() {
 
       // Make sure the Socket is connected
       if (!Socket.socket) {
@@ -50,11 +51,11 @@
     }
 
     function changeColor(estado) {
-        if (estado) {
-          return '#00ff00';
-        } else {
-          return '#ff0000';
-        }
+      if (estado) {
+        return '#00ff00';
+      } else {
+        return '#ff0000';
+      }
     }
 
     // Remove existing Dispositivo

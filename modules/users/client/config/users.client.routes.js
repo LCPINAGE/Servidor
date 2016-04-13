@@ -23,7 +23,7 @@ angular.module('users').config(['$stateProvider',
       })
        .state('settings.createCentral', {
         url: '/createCentral',
-        templateUrl: 'modules/users/client/views/change-central.client.view.html'
+        templateUrl: 'modules/users/client/views/settings/create-central.client.view.html'
       })
       .state('settings.password', {
         url: '/password',

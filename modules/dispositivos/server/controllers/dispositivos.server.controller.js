@@ -8,8 +8,6 @@ var path = require('path'),
   Dispositivo = mongoose.model('Dispositivo'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
-
-
 exports.procuraDispositivos = function (req, res) {
   client.publish('topico_mensura_in', 'AC');
   return res.json({ "sucess": true });  
@@ -18,10 +16,8 @@ exports.procuraDispositivos = function (req, res) {
 exports.turnOnOff = function (req, res) {
   var dispositivo = req.dispositivo;
   if (dispositivo.estado) {
-    //client.publish('topico_mensura_in', '*' + dispositivo.id_disp_central + '%' + '4001~');
     dispositivo.estado = false;
   } else {
-    //client.publish('topico_mensura_in', '*' + dispositivo.id_disp_central + '%' + '4000~');
     dispositivo.estado = true;
   }
   dispositivo.save(function (err) {

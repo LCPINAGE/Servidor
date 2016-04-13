@@ -2,40 +2,55 @@
 
 var validator = require('validator');
 
+var mongoose = require('mongoose'),
+Central = mongoose.model('Central');
+
 /**
- * Render the main application page
+ * Funções Mqtt
  */
-var mqtt    = require('mqtt');
-var client  = mqtt.connect('mqtt://broker.mqtt-dashboard.com');
-client.on('connect', function () {
+
+ var mqtt    = require('mqtt');
+ var client  = mqtt.connect('mqtt://broker.mqtt-dashboard.com');
+ client.on('connect', function () {
   client.subscribe('topico_mensura_out');
   client.publish('topico_mensura_in', 'Ola');
 });
 
-// Tratamento de mensagens recebidas pelo mqtt
+// recebeComando
 var msg = null; 
 var recebeExtensor = false;
 var buffer = [];
 client.on('message', function (topic, message) {
-  msg = message.toString().toUpperCase();
-  if(recebeExtensor){
-    if(msg == 'FI'){
-      recebeExtensor = false;
-    } else { 
-      var i = buffer.lenght + 1;x
-      buffer[i] = msg;
-    }
-  } else {
+  msg = JSON.parse(message);
+  console.log(msg);
+  console.log(msg.id_central);
 
-    switch (msg) {
-      case 'AE':
-        recebeExtensor =true;
-      break;
-    }
-  }
 });
 
- 
+
+exports.enviaComando = function(req, res){
+
+  var id_central = req.user.central;
+  console.log(id_central);
+  Central.find({ '_id': id_central }).exec(function (err, centralSelected) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      var dados = req.body;
+      if (dados.id == null && dados.comando == null) {
+        return res.status(400).send({
+          success: false
+        });
+      } else {
+        var central = centralSelected[0];
+       client.publish(central.topico_mqtt, '*' + dados.id + '%' + dados.comando);
+       res.json({success: true});
+     }
+   }
+ });
+};
 
 exports.renderIndex = function (req, res) {
 
@@ -63,7 +78,7 @@ exports.renderIndex = function (req, res) {
 /**
  * Render the server error page
  */
-exports.renderServerError = function (req, res) {
+ exports.renderServerError = function (req, res) {
   res.status(500).render('modules/core/server/views/500', {
     error: 'Oops! Something went wrong...'
   });
@@ -73,7 +88,7 @@ exports.renderServerError = function (req, res) {
  * Render the server not found responses
  * Performs content-negotiation on the Accept HTTP header
  */
-exports.renderNotFound = function (req, res) {
+ exports.renderNotFound = function (req, res) {
 
   res.status(404).format({
     'text/html': function () {
