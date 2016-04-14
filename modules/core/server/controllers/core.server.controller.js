@@ -3,10 +3,11 @@
 var validator = require('validator');
 
 var mongoose = require('mongoose'),
-Central = mongoose.model('Central');
+Central = mongoose.model('Central'),
+Dispositivo = mongoose.model('Dispositivo');
 
 /**
- * Funções Mqtt
+ * Recebe comando Mqtt
  */
 
  var mqtt    = require('mqtt');
@@ -22,9 +23,30 @@ var recebeExtensor = false;
 var buffer = [];
 client.on('message', function (topic, message) {
   msg = JSON.parse(message);
-  console.log(msg);
   console.log(msg.id_central);
+  console.log(msg.id_extensor);
+  console.log(msg.dado);
 
+  if(msg.id_central !=null && msg.id_extensor != null && msg.dado !=null){
+
+   Dispositivo.find({ 'id_disp_central': msg.id_extensor, 'central': msg.id_central }).exec(function (err, dispositivos) {
+    if (!err) {
+      console.log("achou");
+      var dispositivo = dispositivos[0];
+      dispositivo.historico.unshift(msg.dado);
+      console.log(dispositivo.historico);
+      dispositivo.save(function (err) {
+        if (err) {
+          console.log(errorHandler.getErrorMessage(err));
+        } else {
+          console.log("Salvou");
+        }
+      });
+
+
+    }
+  });
+ }
 });
 
 
@@ -45,11 +67,11 @@ exports.enviaComando = function(req, res){
         });
       } else {
         var central = centralSelected[0];
-       client.publish(central.topico_mqtt, '*' + dados.id + '%' + dados.comando);
-       res.json({success: true});
-     }
-   }
- });
+        client.publish(central.topico_mqtt, '*' + dados.id + '%' + dados.comando);
+        res.json({success: true});
+      }
+    }
+  });
 };
 
 exports.renderIndex = function (req, res) {

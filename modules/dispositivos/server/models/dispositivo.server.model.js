@@ -27,8 +27,7 @@ var DispositivoSchema = new Schema({
     trim: true
   },
   historico: [{
-    type: Date,
-    default: Date.now
+    type: String
   }],
   estado: {
     type: Boolean,
