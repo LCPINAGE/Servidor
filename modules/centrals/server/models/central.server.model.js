@@ -23,24 +23,13 @@ var CentralSchema = new Schema({
   },
   topico_mqtt: {
     type: String,
-    default: 'topico_mensura_in',
-    trim: true
+    trim: true,
+    required: 'topico_mqtt nao pode ficar em branco'
   },
   user: {
     type: Schema.ObjectId,
-    ref: 'User'
-  }, 
-  displayName: {
-    type: String,
-    trim: true
-  },
-  topico_mqtt_in: {
-    type: String,
-    trim: true
-  }, 
-  topico_mqtt_in: {
-    type: String,
-    trim: true
+    ref: 'User',
+    required: 'user nao pode ficar em branco'
   }
 });
 

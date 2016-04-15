@@ -8,13 +8,17 @@ var path = require('path'),
   Dispositivo = mongoose.model('Dispositivo'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
-exports.procuraDispositivos = function (req, res) {
-  client.publish('topico_mensura_in', 'AC');
-  return res.json({ "sucess": true });  
-};
 
 exports.turnOnOff = function (req, res) {
   var dispositivo = req.dispositivo;
+
+  dispositivo.isCurrentUserOwner = !!(req.user && dispositivo.user && dispositivo.user._id.toString() === req.user._id.toString());
+   if(!dispositivo.isCurrentUserOwner){
+     return res.send({
+        message: 'Usuário não tem permissoes necessárias'
+      });
+   }
+
   if (dispositivo.estado) {
     dispositivo.estado = false;
   } else {
@@ -27,9 +31,9 @@ exports.turnOnOff = function (req, res) {
       });
     } else {
       if (dispositivo.estado) {
-        res.json({success : true});
+        res.json({estado : true});
       } else {
-        res.json({success : false});
+        res.json({estado : false});
       }
     }
   });
@@ -70,10 +74,12 @@ exports.read = function (req, res) {
   // convert mongoose document to JSON
   var dispositivo = req.dispositivo ? req.dispositivo.toJSON() : {};
 
-  // Add a custom field to the Dispositivo, for determining if the current User is the "owner".
-  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Dispositivo model.
-  dispositivo.isCurrentUserOwner = !!(req.user && dispositivo.user && dispositivo.user._id.toString() === req.user._id.toString());
-
+ dispositivo.isCurrentUserOwner = !!(req.user && dispositivo.user && dispositivo.user._id.toString() === req.user._id.toString());
+   if(!dispositivo.isCurrentUserOwner){
+     return res.send({
+        message: 'Usuário não tem permissoes necessárias'
+      });
+   }
   res.json(dispositivo);
 };
 
@@ -82,6 +88,13 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
   var dispositivo = req.dispositivo;
+
+  dispositivo.isCurrentUserOwner = !!(req.user && dispositivo.user && dispositivo.user._id.toString() === req.user._id.toString());
+   if(!dispositivo.isCurrentUserOwner){
+     return res.send({
+        message: 'Usuário não tem permissoes necessárias'
+      });
+   }
 
   dispositivo.nome = req.body.nome;
   dispositivo.descricao = req.body.descricao;
@@ -104,6 +117,13 @@ exports.update = function (req, res) {
  */
 exports.delete = function (req, res) {
   var dispositivo = req.dispositivo;
+
+  dispositivo.isCurrentUserOwner = !!(req.user && dispositivo.user && dispositivo.user._id.toString() === req.user._id.toString());
+   if(!dispositivo.isCurrentUserOwner){
+     return res.send({
+        message: 'Usuário não tem permissoes necessárias'
+      });
+   }
 
   dispositivo.remove(function (err) {
     if (err) {

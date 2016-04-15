@@ -4,7 +4,9 @@ var validator = require('validator');
 
 var mongoose = require('mongoose'),
 Central = mongoose.model('Central'),
-Dispositivo = mongoose.model('Dispositivo');
+Dispositivo = mongoose.model('Dispositivo'),
+path = require('path'),
+errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
  * Recebe comando Mqtt
@@ -23,31 +25,73 @@ var recebeExtensor = false;
 var buffer = [];
 client.on('message', function (topic, message) {
   msg = JSON.parse(message);
-  console.log(msg.id_central);
-  console.log(msg.id_extensor);
-  console.log(msg.dado);
 
-  if(msg.id_central !=null && msg.id_extensor != null && msg.dado !=null){
+  switch(msg.tipo_dado){
 
-   Dispositivo.find({ 'id_disp_central': msg.id_extensor, 'central': msg.id_central }).exec(function (err, dispositivos) {
-    if (!err) {
-      console.log("achou");
-      var dispositivo = dispositivos[0];
-      dispositivo.historico.unshift(msg.dado);
-      console.log(dispositivo.historico);
-      dispositivo.save(function (err) {
-        if (err) {
-          console.log(errorHandler.getErrorMessage(err));
-        } else {
-          console.log("Salvou");
-        }
-      });
+    case "msg_extensor":
 
+    if(msg.id_central !=null && msg.id_extensor != null && msg.dado !=null){
 
+     Dispositivo.find({ 'id_disp_central': msg.id_extensor, 'central': msg.id_central }).exec(function (err, dispositivos) {
+      if (!err) {
+        console.log("achou");
+        var dispositivo = dispositivos[0];
+        dispositivo.historico.unshift(msg.dado);
+        console.log(dispositivo.historico);
+        dispositivo.save(function (err) {
+          if (err) {
+            console.log(errorHandler.getErrorMessage(err));
+          } else {
+            console.log("Salvou");
+          }
+        });
+      }
+    });
+
+   }
+ break;// msg_extensor
+
+ case "nova_central":
+
+ if(msg.id_usuario !=null && msg.nome_central != null){
+
+  var central = new Central();
+  var topico_mqtt_central = msg.nome_central + msg.id_usuario + Date.now();
+
+  central.nome = msg.nome_central;
+  central.user = msg.id_usuario;
+  central.topico_mqtt = topico_mqtt_central;
+
+  central.save(function (err) {
+    if (err) {
+      console.log(errorHandler.getErrorMessage(err));
+    } else {
+      console.log("salvou");
+
+      var msgEnvia = "{'id_central': ' " + central.id +  "' , 'topico_mqtt':'" + 
+      topico_mqtt_central + "', 'nome_central':'" + central.nome + "'}";
+      console.log(msgEnvia);
+      client.publish("topico_mensura_in", msgEnvia);
     }
   });
- }
-});
+}
+ break;// nova_central
+
+ case "teste_canal":
+ if(msg.id_central!=null){
+  Central.find({'_id': msg.id_central}).exec(function(err, centrals){
+    if(err){
+      console.log(errorHandler.getErrorMessage(err));
+    }else{
+      var central = centrals[0];
+      client.publish(central.topico_mqtt,"teste de canal");
+    }
+  });
+}
+ break;//teste_canal
+
+}//fecha switch
+});//fecha client.on
 
 
 exports.enviaComando = function(req, res){

@@ -1,0 +1,231 @@
+// mapa das routes do servidor
+
+</api/enviaComando>
+</api/centrals>
+</api/centrals/:centralId>
+</api/dispositivos>
+</api/dispositivos/:dispositivoId>
+</api/dispositivos/:dispositivoId/turnOnOff>
+</api/users>
+</api/users/me>
+
+
+/*************************************************************
+**************************Core********************************
+*************************************************************/
+
+
+//----------------------- POST -------------------------------//
+</api/enviaComando> // envia comando mqtt do servidor para a central
+
+controller: function <enviaComando> em core.server.controller.js
+require[user]
+
+enviaComando:{
+	'id' required
+	'comando' required
+		}
+	
+return:
+	{success: true} // funcionou
+	{success: false} // erro - mensagem inconpleta
+	{getErrorMessage(err)} // erro na pesquisa do banco de dados
+//------------
+
+
+
+/*************************************************************
+**************************Central*****************************
+*************************************************************/
+
+
+//----------------------- GET -------------------------------//
+</api/centrals> // lista todos as centrais conectadas ao usuario
+
+controller:function <list> em centrals.server.controller.js
+require: [user]
+
+return:
+	{lista de centrals} // funcionou
+	{getErrorMessage(err)} // erro na pesquisa do banco de dados
+//----------
+
+
+
+</api/centrals/:centralId> // lista a central no banco com o is especificado
+
+controller: function <read> em centrals.server.controller.js
+require[user]
+
+return:
+	{central} // funcionou
+//----------
+
+//----------------------- POST -------------------------------//
+</api/centrals> // adiciona uma nova central ao banco de dados
+
+controller: function <create> em centrals.server.settings.js
+require[user]
+
+Central:{
+	'nome' required
+	'descricao'
+	'topico_mqtt' required
+	'user' required
+	}
+
+return:
+	{central} // salvou
+	{getErrorMessage(err)} // erro ao salvar no banco de dados
+//-----------
+
+//----------------------- PUT -------------------------------//
+</api/centrals/:centralId> // atualiza a central com o id especificado
+
+controller: function <update> em centrals.server.settings.js
+
+Central:{
+	'nome' required
+	'descricao'
+	'topico_mqtt' required
+	'user' required
+	}
+
+return:
+	{central} //atualizou central
+	{getErrorMessage(err)} erro ao atualizar central
+//--------
+
+//----------------------- DELETE -------------------------------//
+
+</api/centrals/:centralId> // deleta a central com o id especificado
+
+controller: function <delete> em centrals.server.settings.js
+require[user]
+
+return:
+	{central} //deletou
+	{getErrorMessage(err)} // erro ao apagar item do banco de dados
+//--------
+
+
+/*************************************************************
+**************************Dispositivos************************
+*************************************************************/
+
+
+//----------------------- GET -------------------------------//
+</api/dispositivos> // lista todos os dispositivos conectados a central principal
+
+controller:function <list> em dispositivos.server.controller.js
+require: [user]
+
+return:
+	{lista de dispositivos} // funcionou
+	{getErrorMessage(err)} // erro na pesquisa do banco de dados
+//----------
+
+
+</api/dispositivos:dispositivoId> // lista o dispositivo no banco com o id especificado
+
+controller: function <read> em dispositivos.server.controller.js
+require[user]
+
+return:
+	{central} // funcionou
+//----------
+
+
+</api/dispositivos/:dispositivoId/turnOnOff> // altera o estado do dispositivo com o id especificado
+
+controller: function <turnOnOff>  em dispositivos.server.controller.js
+require[user]
+
+return:
+	{estado : true} // funcionou
+	{estado : true} // funcionou
+	{getErrorMessage(err)} // erro ao salvar o novo estado do dispositivo no banco de dados
+//----------
+
+//----------------------- POST -------------------------------//
+</api/dispositivos> // adiciona um novo dispositivo ao banco de dados
+
+controller: function <create> em dispositivos.server.settings.js
+require[user]
+
+Dispositivos:{
+	'nome' required
+	'tipo' required
+	'descricao'
+	'historico'
+	'estado'
+	'central' required
+	'id_disp_central' required
+	'user'
+	}
+
+return:
+	{dispositivo} // salvou
+	{getErrorMessage(err)} // erro ao salvar no banco de dados
+//-----------
+
+//----------------------- PUT -------------------------------//
+</api/dispositivos/:dispositivoId> // atualiza o dispositivo com o id especificado
+
+controller: function <update> em dispositivos.server.settings.js
+
+Dispositivos:{
+	'nome' required
+	'tipo' required
+	'descricao'
+	'historico'
+	'estado'
+	'central' required
+	'id_disp_central' required
+	'user'
+	}
+
+return:
+	{central} //atualizou dispositivo
+	{getErrorMessage(err)} erro ao atualizar central
+//--------
+
+//----------------------- DELETE -------------------------------//
+
+</api/dispositivos/:dispositivoId> // deleta o dispositivo com o id especificado
+
+controller: function <delete> em dispositivos.server.settings.js
+require[user]
+
+return:
+	{dispositivo} //deletou
+	{getErrorMessage(err)} // erro ao apagar item do banco de dados
+//--------
+
+
+
+/*************************************************************
+**************************Users*******************************
+*************************************************************/
+
+
+
+//----------------------- GET -------------------------------//
+</api/users/me> // retorna o usuario logado
+
+controller:function <me> em user.server.profile.controller.js
+require: [user]
+
+return:
+	{usuario} // funcionou
+//----------
+
+
+</api/users> // retorna o usuario logado
+
+controller:function <list> em admin.server.controller.js
+require: [admin]
+
+return:
+	{lista de usuarios} // funcionou
+//----------

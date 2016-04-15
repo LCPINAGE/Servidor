@@ -1,0 +1,40 @@
+//padrao de mensagens enviadas por mqtt e interpetadas pelo servidor
+
+
+
+// mensagem do extensor - salva o dado no historico do extensor 
+{	
+	"tipo_dado" :"msg_extensor",
+		    
+	"id_central": "56fd4e0311d88e981d8360f5", 
+
+	"id_extensor": 1,
+
+	"dado": "movimento detectado"
+}
+
+
+
+
+// adiciona central ao banco de dados
+{	
+	"tipo_dado" :"nova_central",
+		    
+	"id_usuario": "56fd4e0311d88e981d8360f5", 
+
+	"nome_central": "Central_dollynhu"
+	
+}
+
+
+
+// teste canal da nova central
+{
+	"tipo_dado": "teste_canal",
+
+	"id_central":"5711074d5c326c3c045ef4a3"
+		
+}
+
+
+

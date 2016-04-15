@@ -42,7 +42,7 @@
       $http.get('/api/dispositivos/' + id + '/turnOnOff').success(function(retorno) {
         console.log(retorno.success);
         dispositivo.estado = retorno.success;
-        if(retorno.success === true){
+        if(retorno.estado === true){
           alert("Notificação Ativada em " + dispositivo.nome);
         } else {
           alert("Notivicação Desativada em " + dispositivo.nome);

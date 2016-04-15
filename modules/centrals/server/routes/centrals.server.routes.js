@@ -12,12 +12,6 @@ module.exports = function (app) {
     .get(central.list)
     .post(central.create);
 
-  /* app.route('/api/centrals/comando/:centralId').all(centralsPolicy.isAllowed)
-    .post(central.comando);*/
-
-  app.route('/api/centrals/sync/:centralId').all(centralsPolicy.isAllowed)
-    .get(central.sync);
-
   // Single article routes
   app.route('/api/centrals/:centralId').all(centralsPolicy.isAllowed)
     .get(central.read)

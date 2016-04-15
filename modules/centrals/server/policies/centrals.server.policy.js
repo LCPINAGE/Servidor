@@ -35,18 +35,6 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/centrals/:centralId',
       permissions: ['get', 'put']
-    }, {
-      resources: '/api/centrals/comando/:centralId',
-      permissions: ['post']
-    }, {
-      resources: '/api/centrals/sync/:centralId',
-      permissions: ['get']
-    }]
-  }, {
-    roles: ['guest'],
-    allows: [{
-      resources: '/api/centrals',
-      permissions: ['get', 'post']
     }]
   }]);
 };

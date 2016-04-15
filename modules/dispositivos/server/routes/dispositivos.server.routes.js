@@ -12,8 +12,6 @@
   .get(dispositivos.list)
   .post(dispositivos.create);
 
-  app.route('/api/dispositivos/procuraDispositivos').all(dispositivosPolicy.isAllowed)
-  .get(dispositivos.procuraDispositivos);
   // Single dispositivo routes
   app.route('/api/dispositivos/:dispositivoId').all(dispositivosPolicy.isAllowed)
   .get(dispositivos.read)
