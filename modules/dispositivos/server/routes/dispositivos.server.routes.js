@@ -16,7 +16,8 @@
   app.route('/api/dispositivos/:dispositivoId').all(dispositivosPolicy.isAllowed)
   .get(dispositivos.read)
   .put(dispositivos.update)
-  .delete(dispositivos.delete);
+  .delete(dispositivos.delete)
+  .post(dispositivos.listaHistorico);
 
   app.route('/api/dispositivos/:dispositivoId/turnOnOff').all(dispositivosPolicy.isAllowed)
   .get(dispositivos.turnOnOff);

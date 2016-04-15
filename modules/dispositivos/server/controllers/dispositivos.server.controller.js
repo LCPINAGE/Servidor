@@ -38,6 +38,20 @@ exports.turnOnOff = function (req, res) {
     }
   });
 };
+
+exports.listaHistorico = function(req, res){
+  var dispositivo = req.dispositivo;
+  var n = req.body.qtde;
+  console.log(n);
+  var historicoTemp = [n];
+  for(var i = 0; i< n; i++){
+    historicoTemp[i] = dispositivo.historico[i];
+  }
+
+  res.send(historicoTemp);
+
+}
+
 /**
  * Create an dispositivo
  */
@@ -146,7 +160,9 @@ exports.list = function (req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
+
       res.json(dispositivos);
+
     }
   });
 };
