@@ -4,7 +4,7 @@
   </div>
   
   <div class="list-group">
-    <a ng-repeat="central in $scope.centrals" class="list-group-item">
+    <a ng-repeat="central in centrals" ui-sref="centrals.view({ centralId: central._id })" class="list-group-item">
       <small class="list-group-item-text">
         Criada por
         <span ng-if="central.user" ng-bind="central.user.displayName"></span>
@@ -14,7 +14,7 @@
       <p class="list-group-item-text" ng-bind="central.descricao"></p>
     </a>
   </div>
-  <div class="alert alert-warning text-center" ng-if="vm.centrals.$resolved && !vm.centrals.length">
+  <div class="alert alert-warning text-center" ng-if="centrals.$resolved && !centrals.length">
     <p>Nenhuma central ainda</p>
   </div>
 </section>

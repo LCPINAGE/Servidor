@@ -6,9 +6,7 @@
 
   		$scope.centrals = $http.get('/api/centrals');
   		$scope.centrals.then(function(ret) {
-  			console.log(ret.data);
-  			$scope.central = ret.data;
+  			$scope.centrals = ret.data;
   		});
-
   	}
   	]);
