@@ -111,7 +111,7 @@ exports.enviaComando = function(req, res){
         });
       } else {
         var central = centralSelected[0];
-        client.publish(central.topico_mqtt, '*' + dados.id + '%' + dados.comando);
+        client.publish(central.topico_mqtt, '*' + dados.id + '%' + dados.comando + "~");
         res.json({success: true});
       }
     }

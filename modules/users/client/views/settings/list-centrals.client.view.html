@@ -1,0 +1,20 @@
+<section class="row" ng-controller="CentralsListController" >
+  <div class="page-header">
+    <h1>Centrais</h1>
+  </div>
+  
+  <div class="list-group">
+    <a ng-repeat="central in $scope.centrals" class="list-group-item">
+      <small class="list-group-item-text">
+        Criada por
+        <span ng-if="central.user" ng-bind="central.user.displayName"></span>
+        <span ng-if="!central.user">Usuário Desconhecido</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="central.nome"></h4>
+      <p class="list-group-item-text" ng-bind="central.descricao"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.centrals.$resolved && !vm.centrals.length">
+    <p>Nenhuma central ainda</p>
+  </div>
+</section>

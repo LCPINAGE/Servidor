@@ -19,9 +19,6 @@
     vm.turnOnOff = turnOnOff;
 
 
-    vm.messages = [];
-    vm.messageText = '';
-
     function init() {
 
       // Make sure the Socket is connected

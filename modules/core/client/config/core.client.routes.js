@@ -28,6 +28,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         url: '/',
         templateUrl: 'modules/core/client/views/home.client.view.html'
       })
+      .state('google', {
+        url: '/google48195052879a39d9.html',
+        templateUrl: 'modules/core/client/views/google48195052879a39d9.html'
+      })
       .state('not-found', {
         url: '/nao-encontrado',
         templateUrl: 'modules/core/client/views/404.client.view.html',

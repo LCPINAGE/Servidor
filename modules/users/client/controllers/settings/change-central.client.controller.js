@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('users').controller('ChangeCentralController', ['$scope', '$http', '$location', 'Users', 'Authentication',
-  function ($scope, $http, $location, Users, Authentication) {
+  function ($scope, $http,c, Authentication) {
     $scope.user = Authentication.user;
     $scope.id_central;
     $scope.central = $http.get('/api/centrals');
