@@ -3,13 +3,13 @@
 /**
  * Module dependencies.
  */
-var config = require('../config'),
-  mongoose = require('./mongoose'),
-  express = require('./express'),
-  chalk = require('chalk'),
-  seed = require('./seed');
+ var config = require('../config'),
+ mongoose = require('./mongoose'),
+ express = require('./express'),
+ chalk = require('chalk'),
+ seed = require('./seed');
 
-function seedDB() {
+ function seedDB() {
   if (true) { // config.seedDB && config.seedDB.seed) {
     console.log(chalk.bold.red('Aviso:  Usuarios iniciais ativados'));
     seed.start();

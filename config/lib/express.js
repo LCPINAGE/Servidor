@@ -18,13 +18,15 @@ var config = require('../config'),
   flash = require('connect-flash'),
   consolidate = require('consolidate'),
   path = require('path'),
-  lusca = require('lusca');
+  lusca = require('lusca'),
+  cors = require('cors');
 
 /**
  * Initialize local variables
  */
 module.exports.initLocalVariables = function (app) {
   // Setting application local variables
+  app.use(cors());
   app.locals.title = config.app.title;
   app.locals.description = config.app.description;
   if (config.secure && config.secure.ssl === true) {
