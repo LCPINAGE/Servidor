@@ -3,30 +3,60 @@
 /**
  * Module dependencies.
  */
-var config = require('../config'),
-  express = require('express'),
-  morgan = require('morgan'),
-  logger = require('./logger'),
-  bodyParser = require('body-parser'),
-  session = require('express-session'),
-  MongoStore = require('connect-mongo')(session),
-  favicon = require('serve-favicon'),
-  compress = require('compression'),
-  methodOverride = require('method-override'),
-  cookieParser = require('cookie-parser'),
-  helmet = require('helmet'),
-  flash = require('connect-flash'),
-  consolidate = require('consolidate'),
-  path = require('path'),
-  lusca = require('lusca'),
-  cors = require('cors');
+ var config = require('../config'),
+ express = require('express'),
+ morgan = require('morgan'),
+ logger = require('./logger'),
+ bodyParser = require('body-parser'),
+ session = require('express-session'),
+ MongoStore = require('connect-mongo')(session),
+ favicon = require('serve-favicon'),
+ compress = require('compression'),
+ methodOverride = require('method-override'),
+ cookieParser = require('cookie-parser'),
+ helmet = require('helmet'),
+ flash = require('connect-flash'),
+ consolidate = require('consolidate'),
+ path = require('path'),
+ lusca = require('lusca'),
+ cors = require('cors');
 
 /**
  * Initialize local variables
  */
-module.exports.initLocalVariables = function (app) {
+ module.exports.initLocalVariables = function (app) {
   // Setting application local variables
-  app.use(cors());
+app.all('*', function(req, res,next) {
+
+
+    /**
+     * Response settings
+     * @type {Object}
+     */
+    var responseSettings = {
+        "AccessControlAllowOrigin": req.headers.origin,
+        "AccessControlAllowHeaders": "Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name",
+        "AccessControlAllowMethods": "POST, GET, PUT, DELETE, OPTIONS",
+        "AccessControlAllowCredentials": true
+    };
+
+    /**
+     * Headers
+     */
+    res.header("Access-Control-Allow-Credentials", responseSettings.AccessControlAllowCredentials);
+    res.header("Access-Control-Allow-Origin",  responseSettings.AccessControlAllowOrigin);
+    res.header("Access-Control-Allow-Headers", (req.headers['access-control-request-headers']) ? req.headers['access-control-request-headers'] : "x-requested-with");
+    res.header("Access-Control-Allow-Methods", (req.headers['access-control-request-method']) ? req.headers['access-control-request-method'] : responseSettings.AccessControlAllowMethods);
+
+    if ('OPTIONS' == req.method) {
+        res.send(200);
+    }
+    else {
+        next();
+    }
+
+
+});  //app.use(cors());
   app.locals.title = config.app.title;
   app.locals.description = config.app.description;
   if (config.secure && config.secure.ssl === true) {
@@ -52,7 +82,7 @@ module.exports.initLocalVariables = function (app) {
 /**
  * Initialize application middleware
  */
-module.exports.initMiddleware = function (app) {
+ module.exports.initMiddleware = function (app) {
   // Showing stack errors
   app.set('showStackError', true);
 
@@ -96,7 +126,7 @@ module.exports.initMiddleware = function (app) {
 /**
  * Configure view engine
  */
-module.exports.initViewEngine = function (app) {
+ module.exports.initViewEngine = function (app) {
   // Set swig as the template engine
   app.engine('server.view.html', consolidate[config.templateEngine]);
 
@@ -108,7 +138,7 @@ module.exports.initViewEngine = function (app) {
 /**
  * Configure Express session
  */
-module.exports.initSession = function (app, db) {
+ module.exports.initSession = function (app, db) {
   // Express MongoDB session storage
   app.use(session({
     saveUninitialized: true,
@@ -133,7 +163,7 @@ module.exports.initSession = function (app, db) {
 /**
  * Invoke modules server configuration
  */
-module.exports.initModulesConfiguration = function (app, db) {
+ module.exports.initModulesConfiguration = function (app, db) {
   config.files.server.configs.forEach(function (configPath) {
     require(path.resolve(configPath))(app, db);
   });
@@ -142,7 +172,7 @@ module.exports.initModulesConfiguration = function (app, db) {
 /**
  * Configure Helmet headers configuration
  */
-module.exports.initHelmetHeaders = function (app) {
+ module.exports.initHelmetHeaders = function (app) {
   // Use helmet to secure Express headers
   var SIX_MONTHS = 15778476000;
   app.use(helmet.xframe());
@@ -160,7 +190,7 @@ module.exports.initHelmetHeaders = function (app) {
 /**
  * Configure the modules static routes
  */
-module.exports.initModulesClientRoutes = function (app) {
+ module.exports.initModulesClientRoutes = function (app) {
   // Setting the app router and static folder
   app.use('/', express.static(path.resolve('./public')));
 
@@ -173,7 +203,7 @@ module.exports.initModulesClientRoutes = function (app) {
 /**
  * Configure the modules ACL policies
  */
-module.exports.initModulesServerPolicies = function (app) {
+ module.exports.initModulesServerPolicies = function (app) {
   // Globbing policy files
   config.files.server.policies.forEach(function (policyPath) {
     require(path.resolve(policyPath)).invokeRolesPolicies();
@@ -183,7 +213,7 @@ module.exports.initModulesServerPolicies = function (app) {
 /**
  * Configure the modules server routes
  */
-module.exports.initModulesServerRoutes = function (app) {
+ module.exports.initModulesServerRoutes = function (app) {
   // Globbing routing files
   config.files.server.routes.forEach(function (routePath) {
     require(path.resolve(routePath))(app);
@@ -193,7 +223,7 @@ module.exports.initModulesServerRoutes = function (app) {
 /**
  * Configure error handling
  */
-module.exports.initErrorRoutes = function (app) {
+ module.exports.initErrorRoutes = function (app) {
   app.use(function (err, req, res, next) {
     // If the error object doesn't exists
     if (!err) {
@@ -211,7 +241,7 @@ module.exports.initErrorRoutes = function (app) {
 /**
  * Configure Socket.io
  */
-module.exports.configureSocketIO = function (app, db) {
+ module.exports.configureSocketIO = function (app, db) {
   // Load the Socket.io configuration
   var server = require('./socket.io')(app, db);
 
@@ -222,7 +252,7 @@ module.exports.configureSocketIO = function (app, db) {
 /**
  * Initialize the Express application
  */
-module.exports.init = function (db) {
+ module.exports.init = function (db) {
   // Initialize express app
   var app = express();
 
